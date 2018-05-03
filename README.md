@@ -1,4 +1,26 @@
-## Welcome to GitHub Pages
+## Bienvenue
+
+Voici le guide analytique qui accompagne le chapitre "Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes". 
+
+Auteurs
+
+**Tarik Benmarhnia**
+Department of Family Medicine and Public Health  
+University of California, San Diego  
+tbenmarhnia@ucsd.edu  
+[https://profiles.ucsd.edu/tarik.benmarhnia](https://profiles.ucsd.edu/tarik.benmarhnia)
+
+**Daniel Fuller**
+School of Human Kinetics and Recreation  
+Memorial University of Newfoundland  
+daniel.fuller@mun.ca  
+[http://walkabilly.ca/home/](http://walkabilly.ca/home/)
+
+**Britt McKinnon**
+Centre for Global Child Health  
+Toronto Hospital for Sick Children  
+britt.mckinnon@sickkids.ca  
+[http://www.dlsph.utoronto.ca/faculty-profile/mckinnon-britt/](http://www.dlsph.utoronto.ca/faculty-profile/mckinnon-britt/)
 
 You can use the [editor on GitHub](https://github.com/walkabilly/methode_evaluation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
