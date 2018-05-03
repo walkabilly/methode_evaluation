@@ -6,46 +6,21 @@ Vous trouver les données et les codes en R et Stata pour reproduire notre analy
 
 #### Creation des données
 
-Voici le code en R pour creé les données. Elles sont aussi disponible ici:
+Voici le code en R pour creé les données: 
+- [Code R pour simulé les données](https://github.com/walkabilly/methode_evaluation/blob/master/Simulated_Data_fini.md)
+
+Les données sont en format .csv sont disponible ici:
 
 - [Différences dans les Différences (.csv)](https://raw.githubusercontent.com/walkabilly/methode_evaluation/master/did.csv)
 - [Regression avec Discontinuité (.csv)](https://raw.githubusercontent.com/walkabilly/methode_evaluation/master/rd.csv)
 
-You can use the [editor on GitHub](https://github.com/walkabilly/methode_evaluation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+#### Analyses Différences dans les Différences
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Voici les codes en R et Stata pour récrére notre analyses: 
+- [Code R](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD.md)
+- [Code Stata](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD_Stata.md)
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/walkabilly/methode_evaluation/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
 
 ### Auteurs
 
