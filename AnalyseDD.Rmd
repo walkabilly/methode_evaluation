@@ -1,0 +1,110 @@
+---
+title: "Analyse DD (Différences dans les Différences)"
+author: "Daniel Fuller (daniel.fuller@mun.ca) | Tarik Benmarhnia (tbenmarhnia@ucsd.edu) | Britt McKinnon (britt.mckinnon@sickkids.ca)"
+output:
+      html_document:
+        keep_md: true
+---
+
+Exemple d'analyse DD avec les données simulées créé pour ce chapitre. La base de données contient des données sur 20,000 personnes échantillonnées dans 20 états dans une paye fictive. Nous avons aussi créé une variable province pour délimiter des régions géographiques plus importantes que les états. Il y a 3 provinces dans notre pays fictif.
+
+Le code pour cette analyse est basé sur le [Guide de Style R](https://google.github.io/styleguide/Rguide.xml) créé par Google avec quelques modifications pour faciliter l'utilisation du fichier sous R et Stata. 
+
+Les variables dans la base de données sont les suivantes: 
+
+1. **etatID** : l'identificateur de l'état
+2. **individuID** : l'identificateur de l'individu
+3. **connaissance** : connaisance de l'individu au sujet de la connsomation
+4. **effetTemps** : une variable qui indique l'année
+5. **age** : l'âge du répondant
+6. **loi** : indique si l'état à implanté la loi
+7. **consParSem** : le nombre de consommations par semaine
+8. **region** : la region 
+
+### Importer les données
+
+```{r, include=FALSE}
+options(scipen = 1, digits=3)
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, error = FALSE)
+```
+
+```{r, echo=TRUE, warning=FALSE}
+library(broom)
+library(ggplot2)
+library(MASS)
+library(doBy)
+dd <- read.csv("did.csv")
+```
+### Statistiques descriptives par état et temps
+
+```{r, echo=TRUE, warning=FALSE}
+
+
+## Un fonction pour calculer la moyenne, la déviance standard, et la nombre individu
+sumFun <- function(x, ...){
+  c(m=mean(x, ...), Stand_Dev=sd(x, ...))}
+
+### Nombre de consommation par état en moyenne dans le temps 2010 et 2011 
+
+ddDesc <- summaryBy(consParSem ~ etatID*effetTemps, data = dd, FUN = sumFun, na.rm=TRUE)
+print(head(ddDesc))
+
+### Moyenne du nombre de consommations par semaine 
+
+summaryBy(consParSem ~ loi, data = dd, FUN = sumFun, na.rm=TRUE)
+
+### Moyenne du nombre de consommations par semaine par province
+
+summaryBy(consParSem ~ effetTemps*region, data = dd, FUN = sumFun, na.rm=TRUE)
+```
+
+### Regression
+
+```{r, echo=TRUE, warning=FALSE}
+### Examination de la distribution de la variable dépendante. 
+
+ddFig1 <- ggplot(dd, aes(x=consParSem)) + 
+          geom_histogram(aes(y = ..density..), fill = "dark grey", colour = "black", 
+                         alpha = 1/3, size = 0.5) +
+          geom_density(colour = "blue") + 
+          theme(axis.line = element_line(colour = "black"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank(),
+          panel.background = element_blank(),
+          axis.title=element_text(size=16,face="bold"),
+          axis.text=element_text(size=14))
+plot(ddFig1)
+
+### Nous allons utiliser une régression binomiale négative pour modéliser 
+### l'effet de l'intervention
+
+### Modèle 1 : Variable de temps incluse comme facteur
+m1 <- glm.nb(consParSem ~ factor(loi), data=dd)
+summary(m1)
+confint(m1)
+
+### Modèle 2 : Variable de temps et effet 
+m2 <- glm.nb(consParSem ~ factor(loi) + factor(effetTemps), data=dd)
+summary(m2)
+confint(m2)
+
+### Modèle 3 : Variable de temps, effet individuel, et les états comme effet fixe 
+### (c.-à-d.. une variable dichotomique pour chaque état)  
+m3 <- glm.nb(consParSem ~ factor(loi) + factor(effetTemps) + factor(etatID), data=dd)
+summary(m3)
+confint(m3)
+
+
+### Modèle 4 : Variable de temps, effet individuel, états, et variables individuelles
+m4 <- glm.nb(consParSem ~ factor(loi) + factor(effetTemps) + factor(etatID) 
+             + connaisance + age, data=dd)
+summary(m4)
+confint(m4)
+```
+
+
+
+
+
