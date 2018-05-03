@@ -16,11 +16,13 @@ Les données sont en format .csv sont disponible ici:
 
 #### Analyses Différences dans les Différences
 
-Voici les codes en R et Stata pour récrére notre analyses: 
-- [Code R](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD.md)
-- [Code Stata](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD_Stata.md)
+- [Code R - DD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD.md)
+- [Code Stata - DD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD_Stata.md)
 
+#### Regression avec Discontinuité
 
+- [Code R - RD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseRD.md)
+- [Code Stata - RD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseRD_Stata.md)
 
 ### Auteurs
 
