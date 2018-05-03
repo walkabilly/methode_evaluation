@@ -1,6 +1,15 @@
 ## Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes
 
-Voici le guide analytique qui accompagne le chapitre 
+Voici le guide analytique qui accompagne le chapitre "Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes."
+
+Vous trouver les données et les codes en R et Stata pour reproduire notre analyse. 
+
+#### Creation des données
+
+Voici le code en R pour creé les données. Elles sont aussi disponible ici:
+
+- [Différences dans les Différences (.csv)](https://raw.githubusercontent.com/walkabilly/methode_evaluation/master/did.csv)
+- [Regression avec Discontinuité (.csv)](https://raw.githubusercontent.com/walkabilly/methode_evaluation/master/rd.csv)
 
 You can use the [editor on GitHub](https://github.com/walkabilly/methode_evaluation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
