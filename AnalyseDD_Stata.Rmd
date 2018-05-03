@@ -1,3 +1,13 @@
+---
+title: "Analyse DD (Différences dans les Différences)"
+author: "Daniel Fuller (daniel.fuller@mun.ca) | Tarik Benmarhnia (tbenmarhnia@ucsd.edu) | Britt McKinnon (britt.mckinnon@sickkids.ca)"
+output:
+      html_document:
+        keep_md: true
+---
+
+## Code Stata - Analyse DD (Différences dans les Différences)
+
 ```
 ****************************************
 *title: "Analyse DD (Différences dans les Différences)"
