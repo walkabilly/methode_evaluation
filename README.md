@@ -1,13 +1,13 @@
 ## Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes
 
-Voici le guide analytique qui accompagne le chapitre "Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes."
+Voici le guide analytique qui accompagne le chapitre "Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes." Ce chapitre est publié dans le livre "Méthodes avancées d'évaluation d'intervention de santé mondiale." Éditer par Valéry Ridde et Christian Dagenais.
 
-Vous trouver les données et les codes en R et Stata pour reproduire notre analyse. 
+Vous trouvez les données et les codes en R et Stata pour reproduire notre analyse. 
 
-#### Creation des données
+#### Création des données
 
-Voici le code en R pour creé les données: 
-- [Code R pour simulé les données](https://github.com/walkabilly/methode_evaluation/blob/master/Simulated_Data_fini.md)
+Voici le code en R pour créer les données: 
+- [Code R pour simuler les données](https://github.com/walkabilly/methode_evaluation/blob/master/Simulated_Data_fini.md)
 
 Les données sont en format .csv sont disponible ici:
 
@@ -19,7 +19,7 @@ Les données sont en format .csv sont disponible ici:
 - [Code R - DD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD.md)
 - [Code Stata - DD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseDD_Stata.md)
 
-#### Regression avec Discontinuité
+#### Régression avec Discontinuité
 
 - [Code R - RD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseRD.md)
 - [Code Stata - RD](https://github.com/walkabilly/methode_evaluation/blob/master/AnalyseRD_Stata.md)
