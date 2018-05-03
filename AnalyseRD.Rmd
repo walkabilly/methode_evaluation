@@ -1,0 +1,129 @@
+---
+title: "Analyse RD (Regression avec Discontinuité)"
+author: "Daniel Fuller (daniel.fuller@mun.ca) | Tarik Benmarhnia (tbenmarhnia@ucsd.edu) | Britt McKinnon (britt.mckinnon@sickkids.ca)"
+output:
+      html_document:
+        keep_md: true
+---
+
+Exemple d'analyse RD avec les données simulées créé pour ce chapitre. La base de données contient des données sur 1,000 personnes âgées de 19 à 23 ans.
+
+Le code pour cette analyse est basé sur le [Guide de Style R](https://google.github.io/styleguide/Rguide.xml) créé par Google avec quelques modifications pour faciliter l'utilisation du fichier sous R et Stata. 
+
+Les variables dans la base de données sont les suivantes: 
+
+1. **id**: l’identificateur unique pour les répondants.
+2. **age** : une variable qui indique l’âge du répondant.
+3. **propAlcJour** : nombre de consommation d’alcool par jour du répondant.
+4. **fruit** : consommation de fruit et légume par semaine.
+5. **cigarette** : consommation de cigarette par semaine.
+6. **propAlcJour** : le nombre de consommations par semaine
+
+### Importer les données
+
+```{r, include=FALSE}
+options(scipen = 1, digits=2)
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, error = FALSE)
+```
+
+```{r, echo=TRUE, warning=FALSE}
+library(knitr)
+library(ggplot2)
+library(rdrobust)
+library(extrafont)
+library(doBy)
+library(rdrobust)
+
+rd <- read.csv("rd.csv")
+```
+
+### 3. Vérifier que la variable « assignment » est continue et mesurée précisément
+
+```{r, echo=TRUE, warning=FALSE}
+histogramAge <- ggplot(rd, aes(age)) +
+  geom_histogram(binwidth = 0.1)
+plot(histogramAge)
+
+shapiro.test(rd$age)
+
+qqnorm(rd$age); qqline(rd$age, col = 2)
+```
+
+### 4. Visualiser la variable d'assignment par la variable d'intérêt
+
+```{r, echo=TRUE, warning=FALSE}
+ageConsomF1_1 <- ggplot(rd, aes(x = age, y = propAlcJour)) + 
+            geom_point(shape=1) + 
+            geom_smooth(aes(color=factor(dAge), se=FALSE)) +
+            geom_smooth(method="lm", se=FALSE, fullrange=FALSE, colour="black") + 
+            theme(axis.line = element_line(colour = "black"),
+                panel.background = element_blank(),
+                axis.title=element_text(size=16),
+                text=element_text(size=14)) + 
+            xlab("Âge") +
+            ylab("Consommation d'alcool par jour") + 
+            scale_colour_discrete(name  ="Régression loess",
+                            breaks=c("1", "0"),
+                            labels=c("Avant 21", "Après 21"))
+print(ageConsomF1_1)
+ggsave("rdMain.jpg", ageConsomF1_1, dpi = 300)
+```
+
+```{r, echo=FALSE, warning=FALSE}
+jpeg('rdDefaut.jpg', res=300, width = 5, height = 4, units = 'in')
+rdplot(rd$propAlcJour, rd$age, c=21, title = "", 
+       y.label = "Consommation d'alcool par jour", x.label = "Âge", 
+       col.dots="black", col.lines="black")
+dev.off()
+```
+
+### 5. Comparaison de variable d’intérêt et co-variables
+
+```{r, echo=TRUE, warning=FALSE}
+## Un function pour calculer la moyenne, la déviance standard, et la nombre individu
+sumFun <- function(x, ...){
+  c(m=mean(x, ...), Stand_Dev=sd(x, ...))}
+
+### Nombre de consomation par état en moyenne dans le temps 2010 et 2011 
+
+didDesc <- summaryBy(propAlcJour + fruit + cigarette ~ dAge, data = rd, FUN = sumFun, 
+                     na.rm=TRUE)
+print(head(didDesc))
+```
+
+### 6. Sélectionner le « bandwidth »
+
+```{r, echo=TRUE, warning=FALSE}
+rdplot(y = rd$propAlcJour, x = rd$age, c=21, 
+       y.label = "Nombre de consomation par jour", x.label = "Âge")
+```
+
+### 7. Estimer l’effet de la politique publique par des modèles de régression
+
+```{r, echo=TRUE, warning=FALSE}
+
+## Échantillons complets
+lm <- lm(propAlcJour ~ age, data=rd)
+summary(lm)
+confint(lm)
+
+### Kernel Triangulaire
+rdrobust(rd$propAlcJour, rd$age, c=21, kernel= "tri", deriv=0, fuzzy=NULL, all=TRUE)
+rdrobust(rd$propAlcJour, rd$age, c=21, bwselect="cerrd", kernel= "tri", deriv=0, 
+         fuzzy=NULL, all=TRUE)
+
+### Kernel Epa
+rdrobust(rd$propAlcJour, rd$age, c=21, kernel="epa", deriv=0, fuzzy=NULL, all=TRUE)
+rdrobust(rd$propAlcJour, rd$age, c=21, bwselect="cerrd", kernel="epa", deriv=0, 
+         fuzzy=NULL, all=TRUE)
+
+### Kernel Uniforme
+rdrobust(rd$propAlcJour, rd$age, c=21, kernel="uni", deriv=0, fuzzy=NULL, all=TRUE)
+rdrobust(rd$propAlcJour, rd$age, c=21, bwselect="cerrd", kernel="uni", deriv=0, 
+         fuzzy=NULL, all=TRUE)
+
+### Fruit
+rdrobust(rd$fruit, rd$age, c=21, kernel= "tri", deriv=0, fuzzy=NULL, all=TRUE)
+rdrobust(rd$cigarette, rd$age, c=21, kernel= "tri", deriv=0, fuzzy=NULL, all=TRUE)
+```
