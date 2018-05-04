@@ -1,9 +1,8 @@
 ## Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes
 
 Voici le guide analytique qui accompagne le chapitre "Utilisation de méthodes quasi expérimentales pour évaluer l’effet de l’âge légal minimum sur la consommation d'alcool chez les jeunes." Ce chapitre est publié dans le livre "Méthodes avancées d'évaluation d'intervention de santé mondiale." Édité par Valéry Ridde et Christian Dagenais.
-Vous trouverez ici les données et les codes pour R et Stata afin de reproduire nos analyses.
 
-Vous trouvez les données et les codes en R et Stata pour reproduire notre analyse. 
+Vous trouverez ici les données et les codes pour R et Stata afin de reproduire nos analyses.
 
 #### Création des données
 
